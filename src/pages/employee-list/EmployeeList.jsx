@@ -122,17 +122,11 @@ function EmployeeList({ data }) {
       </table>
 
       <div className="pagination">
-        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-          {'<<'}
-        </button>{' '}
         <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          {'<'}
+          {'Previous'}
         </button>{' '}
         <button onClick={() => nextPage()} disabled={!canNextPage}>
-          {'>'}
-        </button>{' '}
-        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-          {'>>'}
+          {'Next'}
         </button>{' '}
         <span>
           Page{' '}
@@ -146,7 +140,7 @@ function EmployeeList({ data }) {
             setPageSize(Number(e.target.value));
           }}
         >
-          {[10, 20, 30, 40, 50].map((pageSize) => (
+          {[10, 25, 50, 100].map((pageSize) => (
             <option key={pageSize} value={pageSize}>
               Show {pageSize}
             </option>

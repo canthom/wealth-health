@@ -23,73 +23,73 @@ const months = [
   'December',
 ];
 
-const returnHome = (e) => {
-  e.preventDefault();
-};
+// const returnHome = (e) => {
+//   e.preventDefault();
+// };
 
-const customHeader = ({
-  date,
-  changeYear,
-  changeMonth,
-  decreaseMonth,
-  increaseMonth,
-  prevMonthButtonDisabled,
-  nextMonthButtonDisabled,
-}) => (
-  <div
-    style={{
-      margin: '10px',
-      display: 'flex',
-      justifyContent: 'center',
-    }}
-  >
-    <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
-      {'<'}
-    </button>
+// const customHeader = ({
+//   date,
+//   changeYear,
+//   changeMonth,
+//   decreaseMonth,
+//   increaseMonth,
+//   prevMonthButtonDisabled,
+//   nextMonthButtonDisabled,
+// }) => (
+//   <div
+//     style={{
+//       margin: '10px',
+//       display: 'flex',
+//       justifyContent: 'center',
+//     }}
+//   >
+//     <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
+//       {'<'}
+//     </button>
 
-    <button
-      onClick={(e) => {
-        e.preventDefault();
-        console.log(date);
-        changeMonth(getMonth(date));
-      }}
-    >
-      &#x1F3E0;
-    </button>
+//     <button
+//       onClick={(e) => {
+//         e.preventDefault();
+//         console.log(date);
+//         changeMonth(getMonth(date));
+//       }}
+//     >
+//       &#x1F3E0;
+//     </button>
 
-    <select
-      style={{
-        fontSize: '16px',
-      }}
-      value={getYear(date)}
-      onChange={({ target: { value } }) => changeYear(value)}
-    >
-      {years.map((option) => (
-        <option key={option} value={option}>
-          {option}
-        </option>
-      ))}
-    </select>
+//     <select
+//       style={{
+//         fontSize: '16px',
+//       }}
+//       value={getYear(date)}
+//       onChange={({ target: { value } }) => changeYear(value)}
+//     >
+//       {years.map((option) => (
+//         <option key={option} value={option}>
+//           {option}
+//         </option>
+//       ))}
+//     </select>
 
-    <select
-      style={{
-        fontSize: '16px',
-      }}
-      value={months[getMonth(date)]}
-      onChange={({ target: { value } }) => changeMonth(months.indexOf(value))}
-    >
-      {months.map((option) => (
-        <option key={option} value={option}>
-          {option}
-        </option>
-      ))}
-    </select>
+//     <select
+//       style={{
+//         fontSize: '16px',
+//       }}
+//       value={months[getMonth(date)]}
+//       onChange={({ target: { value } }) => changeMonth(months.indexOf(value))}
+//     >
+//       {months.map((option) => (
+//         <option key={option} value={option}>
+//           {option}
+//         </option>
+//       ))}
+//     </select>
 
-    <button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
-      {'>'}
-    </button>
-  </div>
-);
+//     <button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
+//       {'>'}
+//     </button>
+//   </div>
+// );
 
 function Home({ updateData }) {
   const list = [...statesList];
@@ -113,8 +113,8 @@ function Home({ updateData }) {
         {
           firstname: firstNameInput.current.value,
           lastname: lastNameInput.current.value,
-          birthDate: birthDate.toLocaleDateString(),
-          startDate: startDate.toLocaleDateString(),
+          birthDate: birthDate.toLocaleDateString('en-US'),
+          startDate: startDate.toLocaleDateString('en-US'),
           street: adressInput.current.value,
           city: cityInput.current.value,
           federalState: stateInput.current.value,
@@ -149,6 +149,7 @@ function Home({ updateData }) {
             showMonthDropdown
             showYearDropdown
             dateFormatCalendar=" "
+            todayButton="🏠"
           />
         </div>
 
@@ -161,7 +162,7 @@ function Home({ updateData }) {
             showYearDropdown
             dateFormatCalendar=" "
             placeholderText="Click to select a date"
-            renderCustomHeader={customHeader}
+            todayButton="🏠"
           />
         </div>
 
