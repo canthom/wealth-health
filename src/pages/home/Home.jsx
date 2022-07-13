@@ -1,99 +1,31 @@
 import React, { useState, useRef } from 'react';
 import StyledHome from './Home.styled';
 import { statesList } from '../../data/statesList';
-import Popup from '../../components/popup/Popup';
+import { Popup } from 'modal-comp-for-react';
 import DatePicker from 'react-datepicker';
 import { getMonth, getYear } from 'date-fns';
 import range from 'lodash/range';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const years = range(1990, getYear(new Date()) + 1, 1);
-const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
-
-// const returnHome = (e) => {
-//   e.preventDefault();
-// };
-
-// const customHeader = ({
-//   date,
-//   changeYear,
-//   changeMonth,
-//   decreaseMonth,
-//   increaseMonth,
-//   prevMonthButtonDisabled,
-//   nextMonthButtonDisabled,
-// }) => (
-//   <div
-//     style={{
-//       margin: '10px',
-//       display: 'flex',
-//       justifyContent: 'center',
-//     }}
-//   >
-//     <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
-//       {'<'}
-//     </button>
-
-//     <button
-//       onClick={(e) => {
-//         e.preventDefault();
-//         console.log(date);
-//         changeMonth(getMonth(date));
-//       }}
-//     >
-//       &#x1F3E0;
-//     </button>
-
-//     <select
-//       style={{
-//         fontSize: '16px',
-//       }}
-//       value={getYear(date)}
-//       onChange={({ target: { value } }) => changeYear(value)}
-//     >
-//       {years.map((option) => (
-//         <option key={option} value={option}>
-//           {option}
-//         </option>
-//       ))}
-//     </select>
-
-//     <select
-//       style={{
-//         fontSize: '16px',
-//       }}
-//       value={months[getMonth(date)]}
-//       onChange={({ target: { value } }) => changeMonth(months.indexOf(value))}
-//     >
-//       {months.map((option) => (
-//         <option key={option} value={option}>
-//           {option}
-//         </option>
-//       ))}
-//     </select>
-
-//     <button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
-//       {'>'}
-//     </button>
-//   </div>
-// );
+// const years = range(1990, getYear(new Date()) + 1, 1);
+// const months = [
+//   'January',
+//   'February',
+//   'March',
+//   'April',
+//   'May',
+//   'June',
+//   'July',
+//   'August',
+//   'September',
+//   'October',
+//   'November',
+//   'December',
+// ];
 
 function Home({ updateData }) {
   const list = [...statesList];
-  const [btnPopup, setBtnPopup] = useState(false);
+  const [popupActive, setPopupActive] = useState(false);
   const firstNameInput = useRef();
   const lastNameInput = useRef();
   const adressInput = useRef();
@@ -124,7 +56,7 @@ function Home({ updateData }) {
       ];
       return newState;
     });
-    setBtnPopup(true);
+    setPopupActive(true);
   };
 
   return (
@@ -211,9 +143,12 @@ function Home({ updateData }) {
         </button>
 
         <Popup
-          showPopup={btnPopup}
-          setShowPopup={() => setBtnPopup(false)}
-          overlay={true}
+          showPopup={popupActive}
+          closePopup={(e) => {
+            e.preventDefault();
+            setPopupActive(false);
+          }}
+          overlay
         >
           Employee Created!
         </Popup>
